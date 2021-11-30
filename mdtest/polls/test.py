@@ -68,20 +68,19 @@ class QuestionIndexViewTests(TestCase):
         )
 
     def test_future_question(self):
-        """
+        '''
         미래의 pub_date가 
         있는 질문은 색인 페이지에 표시되지 않습니다.
-        """
+        '''
         create_question(question_text="Future question.", days=30)
         response = self.client.get(reverse('polls:index'))
         self.assertContains(response, "No polls are available.")
-        self.assertQuerysetEqual(response.context['latest_question_list'], [])
-
+    
     def test_future_question_and_past_question(self):
-        """
+        '''
         과거 질문과 미래 질문이 모두 
         존재하더라도 과거 질문만 표시됩니다.
-        """
+        '''
         question = create_question(question_text="Past question.", days=-30)
         create_question(question_text="Future question.", days=30)
         response = self.client.get(reverse('polls:index'))

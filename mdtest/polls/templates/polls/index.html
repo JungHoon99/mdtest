@@ -1,5 +1,7 @@
 <html>
     <head>
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
         <link rel="shortcut icon" href="#">
     </head>
     {% if latest_question_list %}
